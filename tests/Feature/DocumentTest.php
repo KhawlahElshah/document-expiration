@@ -13,13 +13,15 @@ class DocumentTest extends TestCase
     /**
      *@test
      */
-    function a_user_can_have_multiply_documents()
+    function a_user_can_add_document_to_get_reminded_about()
     {
         $this->actingAs(factory('App\User')->create());
         $document = factory('App\Document')->raw();
 
         $this->get('/documents/create')->assertOk();
-        $this->post("/documents", $document)
+        $this->post("/documents", array_merge($document, [
+            'notify_before_number_days' => 10
+        ]))
             ->assertRedirect('/documents');
 
         $this->assertDatabaseHas("documents", [
@@ -27,6 +29,11 @@ class DocumentTest extends TestCase
             'notes'       => $document['notes'],
             'expiry_date' => $document['expiry_date'],
             'user_id'     => auth()->id()
+        ]);
+
+        $this->assertDatabaseHas("reminders", [
+            'document_id'           => 1,
+            'notify_before_number_days' => 10
         ]);
     }
 

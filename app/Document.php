@@ -28,4 +28,14 @@ class Document extends Model
         return $query->whereDate('expiry_date', '>', today())
             ->whereNotBetween('expiry_date', [today(), today()->addDays(30)]);
     }
+
+    public function saveReminder($number_of_days_notify_before)
+    {
+        $this->reminders()->create(['notify_before_number_days' => $number_of_days_notify_before]);
+    }
+
+    public function reminders()
+    {
+        return $this->hasMany(Reminder::class);
+    }
 }

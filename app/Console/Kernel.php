@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\User;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Faker;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,8 +26,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // $number = random_int(1, 9999);
+
+        // $schedule->call(function () use ($number) {
+        //     User::create([
+        //         'name'     => 'someone',
+        //         'email'    => "someone{$number}@example.com",
+        //         'password' => bcrypt('111111')
+        //     ]);
+        // })->everyMinute();
     }
 
     /**
@@ -35,7 +44,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

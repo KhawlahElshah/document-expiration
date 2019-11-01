@@ -25,8 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         return view('home')
-            ->with('active_documents_count', auth()->user()->documents()->active()->count())
-            ->with('expired_documents_count', auth()->user()->documents()->expired()->count())
-            ->with('warned_documents_count', auth()->user()->documents()->warned()->count());
+            ->with('active_documents', auth()->user()->documents()->active()->get())
+            ->with('expired_documents', auth()->user()->documents()->expired()->get())
+            ->with('warned_documents', auth()->user()->documents()->warned()->get());
     }
 }

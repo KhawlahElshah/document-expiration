@@ -15,8 +15,6 @@ class CategoryTest extends TestCase
      */
     function user_can_list_his_documents_categories()
     {
-        // $this->withoutExceptionHandling();
-
         $this->actingAs(factory('App\User')->create());
         $documents = factory('App\Document', 2)->create(['user_id' => auth()->user()->id]);
 

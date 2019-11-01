@@ -36,4 +36,17 @@ class DocumentTest extends TestCase
         $this->assertCount(1, Document::warned()->get());
         $this->assertCount(1, Document::active()->get());
     }
+
+    /**
+     *@test
+     */
+    public function it_has_many_reminders()
+    {
+        $document = factory('App\Document')->create();
+
+        $document->saveReminder($number_of_days_to_notify_before = 5);
+
+        $this->assertInstanceOf('App\Reminder', $document->reminders()->first());
+        $this->assertCount(1, $document->reminders);
+    }
 }
