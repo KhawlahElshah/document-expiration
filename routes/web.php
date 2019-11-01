@@ -16,8 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('documents', 'DocumentController@index')->name('documents.index');
-Route::get('documents/create', 'DocumentController@create')->name('documents.create');
-Route::post('documents', 'DocumentController@store')->name('documents.store');
+Route::get('categories/{category}/documents/create', 'DocumentController@create')->name('documents.create');
+Route::post('categories/{category}/documents', 'DocumentController@store')->name('documents.store');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
 
 Auth::routes();

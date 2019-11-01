@@ -16,10 +16,12 @@ class DocumentTest extends TestCase
     function a_user_can_add_document_to_get_reminded_about()
     {
         $this->actingAs(factory('App\User')->create());
+        
+        $category = factory('App\Category')->create();
         $document = factory('App\Document')->raw();
 
-        $this->get('/documents/create')->assertOk();
-        $this->post("/documents", array_merge($document, [
+        $this->get("/categories/{$category->name}/documents/create")->assertOk();
+        $this->post("/categories/{$category->name}/documents", array_merge($document, [
             'notify_before_number_days' => 10
         ]))
             ->assertRedirect('/documents');

@@ -56,14 +56,15 @@
                         class="block mt-4 lg:inline-block lg:mt-0 text-teal-500 hover:text-white mr-4">
                         {{ __('My Documents') }}
                     </a>
-                    <a href="#"
-                        class="inline-block text-sm px-4 py-2 leading-none border rounded bg-teal-500 text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+                    <a href="{{ route('categories.index') }}"
+                        class="inline-block text-sm px-4 py-2 leading-none border rounded bg-teal-500 text-white border-white hover:no-underline hover:bg-teal-300 mt-4 lg:mt-0">
                         {{ __('Add New Document') }}
                     </a>
                 </div>
 
                 <div class="" aria-labelledby="navbarDropdown">
-                    <a class="inline-block text-sm px-4 py-2 leading-none border rounded bg-teal-500 text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    <a class="inline-block text-sm px-4 py-2 leading-none border rounded bg-teal-500 text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+                        href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>

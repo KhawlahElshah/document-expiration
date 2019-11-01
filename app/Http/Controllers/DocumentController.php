@@ -15,7 +15,7 @@ class DocumentController extends Controller
         return view('documents.index')->with('documents', $documents);
     }
 
-    public function create()
+    public function create(Category $category)
     {
         $categories = Category::all();
 

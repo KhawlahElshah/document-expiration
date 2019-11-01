@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = auth()->user()->documents()->get()->groupBy('category.name');
+        $categories = Category::where('parent_id', 0)->get();
 
         return view('categories.index')->with('categories', $categories);
     }
