@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Document extends Model
 {
@@ -18,9 +20,16 @@ class Document extends Model
         return $query->whereDate('expiry_date', '<=', today());
     }
 
+    public function scopeNotExpired($query)
+    {
+        return $query->whereDate('expiry_date', '>=', today());
+    }
+
     public function scopeWarned($query)
     {
-        return $query->whereDate('expiry_date', '>', today()->addDays(30));
+        return $query->whereHas('reminders', function (Builder $query) {
+            $query->where('notification_date', '<=', today());
+        })->notExpired();
     }
 
     public function scopeActive($query)
@@ -31,11 +40,16 @@ class Document extends Model
 
     public function saveReminder($number_of_days_notify_before)
     {
-        $this->reminders()->create(['notify_before_number_days' => $number_of_days_notify_before]);
+        $this->reminders()->create(['notification_date' => Carbon::create($this->expiry_date)->subDays($number_of_days_notify_before)]);
     }
 
     public function reminders()
     {
         return $this->hasMany(Reminder::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

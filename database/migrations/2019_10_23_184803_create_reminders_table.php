@@ -15,7 +15,7 @@ class CreateRemindersTable extends Migration
     {
         Schema::create('reminders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('notify_before_number_days');
+            $table->date('notification_date');
             $table->unsignedBigInteger('document_id');
             $table->timestamps();
         });

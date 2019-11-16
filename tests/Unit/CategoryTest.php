@@ -20,4 +20,16 @@ class CategoryTest extends TestCase
 
         $this->assertCount(3, $category->documents);
     }
+
+    /**
+     *@test
+     */
+    public function it_has_many_subCategories()
+    {
+        $category = factory('App\Category')->create();
+        $subCategory = factory('App\Category')->create(['parent_id' => $category]);
+
+        $this->assertInstanceOf('App\Category', $category->subCategories->first());
+        $this->assertCount(1, $category->subCategories);
+    }
 }

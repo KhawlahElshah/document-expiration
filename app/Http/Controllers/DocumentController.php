@@ -25,7 +25,7 @@ class DocumentController extends Controller
     public function store()
     {
         request()->validate([
-            'name'                      => 'required',
+            'title'                     => 'required',
             'notes'                     => 'nullable',
             'expiry_date'               => 'required|date',
             'category_id'               => 'required',
@@ -33,7 +33,7 @@ class DocumentController extends Controller
         ]);
 
         $document = Document::create([
-            'name'        => request('name'),
+            'title'       => request('title'),
             'notes'       => request('notes'),
             'expiry_date' => request('expiry_date'),
             'category_id' => request('category_id'),
@@ -42,6 +42,6 @@ class DocumentController extends Controller
 
         $document->saveReminder(request('notify_before_number_days'));
 
-        return redirect(route('documents.index'));
+        return redirect(route('home'));
     }
 }

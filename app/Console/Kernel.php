@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Document;
+use App\Notifications\DocumentNearlyExpiring;
 use App\User;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -26,15 +28,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $number = random_int(1, 9999);
+        $schedule->call(function () {
+            Document::warned()->get()->each(function ($document) {
 
-        // $schedule->call(function () use ($number) {
-        //     User::create([
-        //         'name'     => 'someone',
-        //         'email'    => "someone{$number}@example.com",
-        //         'password' => bcrypt('111111')
-        //     ]);
-        // })->everyMinute();
+                if ($document->reminders()->first()->notification_date->equalTo(today())) {
+                    $document->owner->notify(new DocumentNearlyExpiring());
+                }
+            });
+        })->daily();
     }
 
     /**

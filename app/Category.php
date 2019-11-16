@@ -10,8 +10,14 @@ class Category extends Model
     {
         return 'slug';
     }
+
     public function documents()
     {
         return $this->hasMany(Document::class);
+    }
+
+    public function subCategories()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
     }
 }

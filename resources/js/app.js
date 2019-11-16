@@ -21,6 +21,9 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('category-index', require('./components/CategoryIndex.vue').default);
+Vue.component('document-index', require('./components/DocumentIndex.vue').default);
+Vue.component('account-dropdown', require('./components/AccountDropDown.vue').default);
+
 
 
 /**

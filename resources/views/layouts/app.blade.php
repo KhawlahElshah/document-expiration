@@ -20,6 +20,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    {{--  icons  --}}
+    <script src="https://kit.fontawesome.com/bfbc96adee.js" crossorigin="anonymous"></script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -38,113 +41,58 @@
                 </button>
             </div>
             <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+                <div class="flex items-center flex-shrink-0 text-pink-700 mr-6">
+                    <span class="text-xl tracking-tight">Document Expiration</span>
+                </div>
                 <!-- Authentication Links -->
                 @guest
-                <a class="block mt-4 lg:inline-block lg:mt-0 text-teal-500 hover:text-white mr-4"
+                <a class="block lg:inline-block lg:mt-0 text-teal-500 hover:text-white mr-4"
                     href="{{ route('login') }}">{{ __('Login') }}</a>
                 @if (Route::has('register'))
-                <a class="block mt-4 lg:inline-block lg:mt-0 text-teal-500 hover:text-white mr-4"
+                <a class="block lg:inline-block lg:mt-0 text-teal-500 hover:text-white mr-4"
                     href="{{ route('register') }}">{{ __('Register') }}</a>
                 @endif
                 @else
                 <div class="text-sm lg:flex-grow">
-                    <a href="#responsive-header"
-                        class="block mt-4 lg:inline-block lg:mt-0 text-teal-500 hover:text-white mr-4">
-                        {{ __('My Account') }}
-                    </a>
-                    <a href="#responsive-header"
-                        class="block mt-4 lg:inline-block lg:mt-0 text-teal-500 hover:text-white mr-4">
+                    <a href="{{ route('home') }}"
+                        class="block lg:inline-block lg:mt-0 text-teal-500 hover:text-teal-600 no-underline mr-4">
                         {{ __('My Documents') }}
                     </a>
                     <a href="{{ route('categories.index') }}"
-                        class="inline-block text-sm px-4 py-2 leading-none border rounded bg-teal-500 text-white border-white hover:no-underline hover:bg-teal-300 mt-4 lg:mt-0">
+                        class="inline-block text-sm px-4 py-2 leading-none border rounded bg-teal-500 text-white border-white hover:no-underline hover:bg-teal-300 lg:mt-0">
                         {{ __('Add New Document') }}
                     </a>
                 </div>
 
-                <div class="" aria-labelledby="navbarDropdown">
-                    <a class="inline-block text-sm px-4 py-2 leading-none border rounded bg-teal-500 text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-                        href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
+                <account-dropdown inline-template>
+                    <div class="relative group">
+                        <div @click="toggleShowAccountDropDown()"
+                            class="flex items-center cursor-pointer text-sm text-blue border border-white mr-4 border-b-0 group-hover:border-grey-light rounded-t-lg py-1 px-2">
+                            {{ auth()->user()->name }}
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
+                        </div>
+                        <div class="items-center absolute border border-t-0 rounded-b-lg p-1 bg-white group-hover:visible w-full"
+                            :class="(showAccountDropDown)? '' : 'invisible'">
+                            <a href="#" class="px-4 py-2 block text-black hover:bg-grey-lighter">{{ __('Profile') }}</a>
+                            <hr class="border-t mx-2 border-grey-ligght">
+                            <a class="px-4 py-2 block text-black hover:bg-grey-lighter" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                                         document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
-                @endguest
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            </a>
+                        </div>
+                </account-dropdown>
             </div>
-
-            <div class="flex items-center flex-shrink-0 text-teal-500 mr-6">
-                <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
-                </svg>
-                <span class="font-semibold text-xl tracking-tight">Tailwind CSS</span>
-            </div>
-        </nav>
-        {{--  <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-        {{ config('app.name', 'Laravel') }}
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
-                @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-                @endif
-                @else
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('categories.index') }}">{{ __('My Categories') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('documents.index') }}">{{ __('My Documents') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('documents.create') }}">{{ __('Add New Document') }}</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-                @endguest
-            </ul>
-        </div>
+            @endguest
     </div>
-    </nav> --}}
+    </nav>
 
     <main class="py-4 bg-gray-100">
         @yield('content')

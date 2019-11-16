@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Document::class, function (Faker $faker) {
     return [
-        'name'        => $faker->word,
+        'title'       => $faker->word,
         'notes'       => $faker->sentence(),
         'expiry_date' => $faker->date,
         'category_id' => factory('App\Category'),
