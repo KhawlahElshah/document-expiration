@@ -47,20 +47,20 @@
                 <!-- Authentication Links -->
                 @guest
                 <a class="block lg:inline-block lg:mt-0 text-teal-500 hover:text-white mr-4"
-                    href="{{ route('login') }}">{{ __('Login') }}</a>
+                    href="{{ route('login') }}">{{ __('messages.Login') }}</a>
                 @if (Route::has('register'))
                 <a class="block lg:inline-block lg:mt-0 text-teal-500 hover:text-white mr-4"
-                    href="{{ route('register') }}">{{ __('Register') }}</a>
+                    href="{{ route('register') }}">{{ __('messages.Register') }}</a>
                 @endif
                 @else
                 <div class="text-sm lg:flex-grow">
                     <a href="{{ route('home') }}"
                         class="block lg:inline-block lg:mt-0 text-teal-500 hover:text-teal-600 no-underline mr-4">
-                        {{ __('My Documents') }}
+                        {{ __('messages.My Documents') }}
                     </a>
                     <a href="{{ route('categories.index') }}"
                         class="inline-block text-sm px-4 py-2 leading-none border rounded bg-teal-500 text-white border-white hover:no-underline hover:bg-teal-300 lg:mt-0">
-                        {{ __('Add New Document') }}
+                        {{ __('messages.Add New Document') }}
                     </a>
                 </div>
 
@@ -80,7 +80,7 @@
                             <a class="px-4 py-2 block text-black hover:bg-grey-lighter" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                                          document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('messages.Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

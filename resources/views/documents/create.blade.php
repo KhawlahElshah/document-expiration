@@ -10,7 +10,7 @@
         <div class="flex mb-4">
             <div class="flex-1 mr-3">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                    {{ __('Document Title') }}
+                    {{ __('messages.Document Title') }}
                 </label>
                 <input
                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
@@ -24,15 +24,15 @@
 
             <div class="flex-1">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
-                    {{ __('Document Category') }}
+                    {{ __('messages.Document Category') }}
                 </label>
 
                 <div class="relative">
                     <select name="category_id" id="category"
                         class="block appearance-none text-gray-700 w-full bg-white border py-2 px-3 rounded leading-tight focus:outline-none">
-                        <option value="">{{ __('Select A Category') }}</option>
+                        <option value="">{{ __('messages.Select A Category') }}</option>
                         @foreach (request()->route('category')->subCategories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
 
                     </select>
@@ -54,7 +54,7 @@
         <div class="flex mb-4">
             <div class="flex-1 mr-3">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="expiryDate">
-                    {{ __('Document Expiration Date') }}
+                    {{ __('messages.Document Expiration Date') }}
                 </label>
                 <input
                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
@@ -69,8 +69,8 @@
 
             <div class="flex-1">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="notifyBeforeNumberDays">
-                    {{ __('Notify me before') }}
-                    <span>({{ __('days') }})</span>
+                    {{ __('messages.Notify me before') }}
+                    <span>({{ __('messages.days') }})</span>
                 </label>
                 <input
                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
@@ -86,7 +86,7 @@
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
-                {{ __('Description') }}
+                {{ __('messages.Description') }}
             </label>
             <textarea name="description" id="description" cols="30" rows="10"
                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"></textarea>
@@ -102,7 +102,7 @@
             <button
                 class="bg-pink-900 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit">
-                {{ __('Add') }}
+                {{ __('messages.Add') }}
             </button>
         </div>
     </form>
