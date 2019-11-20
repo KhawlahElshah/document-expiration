@@ -19,8 +19,6 @@ class DocumentTest extends TestCase
      */
     function a_user_can_add_document_to_get_reminded_about()
     {
-        $this->withoutExceptionHandling();
-
         $this->actingAs(factory('App\User')->create());
 
         $category = factory('App\Category')->create();
@@ -61,7 +59,6 @@ class DocumentTest extends TestCase
      */
     public function users_will_get_email_notification_when_their_notification_day_reaches()
     {
-        $this->withoutExceptionHandling();
         Notification::fake();
 
         $document = factory('App\Document')->create();

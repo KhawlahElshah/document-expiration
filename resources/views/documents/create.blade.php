@@ -8,13 +8,13 @@
         @csrf
 
         <div class="flex mb-4">
-            <div class="flex-1 mr-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+            <div class="flex-1 ml-3">
+                <label class="block text-right text-gray-700 text-sm font-bold mb-2" for="title">
                     {{ __('messages.Document Title') }}
                 </label>
                 <input
-                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-                    id="title" name="title" type="text" placeholder="{{ __('Ex:your jhon driving licence') }}">
+                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none text-right"
+                    id="title" name="title" type="text" placeholder="{{ __('messages.Ex:your jhon driving licence') }}">
                 @error('title')
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 mt-1 rounded relative" role="alert">
                     <span class="block sm:inline text-xs">{{ $message }}</span>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="flex-1">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                <label class="block text-right text-gray-700 text-sm font-bold mb-2" for="category">
                     {{ __('messages.Document Category') }}
                 </label>
 
@@ -32,11 +32,11 @@
                         class="block appearance-none text-gray-700 w-full bg-white border py-2 px-3 rounded leading-tight focus:outline-none">
                         <option value="">{{ __('messages.Select A Category') }}</option>
                         @foreach (request()->route('category')->subCategories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}">{{ __("messages.$category->name") }}</option>
                         @endforeach
 
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
@@ -52,8 +52,8 @@
         </div>
 
         <div class="flex mb-4">
-            <div class="flex-1 mr-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="expiryDate">
+            <div class="flex-1 ml-3">
+                <label class="block text-right text-gray-700 text-sm font-bold mb-2" for="expiryDate">
                     {{ __('messages.Document Expiration Date') }}
                 </label>
                 <input
@@ -68,7 +68,7 @@
             </div>
 
             <div class="flex-1">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="notifyBeforeNumberDays">
+                <label class="block text-right text-gray-700 text-sm font-bold mb-2" for="notifyBeforeNumberDays">
                     {{ __('messages.Notify me before') }}
                     <span>({{ __('messages.days') }})</span>
                 </label>
@@ -85,7 +85,7 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+            <label class="block text-right text-gray-700 text-sm font-bold mb-2" for="description">
                 {{ __('messages.Description') }}
             </label>
             <textarea name="description" id="description" cols="30" rows="10"
@@ -98,7 +98,7 @@
             @enderror
         </div>
 
-        <div class="flex items-center justify-between">
+        <div class="flex justify-end">
             <button
                 class="bg-pink-900 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit">

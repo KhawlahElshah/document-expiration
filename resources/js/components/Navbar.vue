@@ -2,13 +2,16 @@
 export default {
         data(){
             return {
-                showAccountDropDown: false
+                showAccountDropDown: false,
+                showMobileNavbar: false,
             }
         },
         methods: {
             toggleShowAccountDropDown(){
-                console.log('dsfsd');
                 this.showAccountDropDown = !this.showAccountDropDown;
+            },
+            toggleMobileNavbar(){
+                this.showMobileNavbar = !this.showMobileNavbar;
             }
         }
     }
